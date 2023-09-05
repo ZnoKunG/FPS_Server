@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,15 +12,16 @@ namespace FPS_Server
     {
         public int Id;
         public string Username;
-
-        public int Score;
+        public Vector3 Position;
+        public Quaternion Rotation;
         public Lobby currentLobby;
 
-        public Player(int id, string username, int score = 0)
+        public Player(int id, string username, Vector3 position)
         {
             Id = id;
             Username = username;
-            Score = score;
+            Position = position;
+            Rotation = Quaternion.Identity;
         }
 
         public void JoinLobby(Lobby lobby)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,13 +38,14 @@ namespace FPS_Server
 
         }
 
-        public static void SpawnPlayer(int toClient, Player player)
+        public static void SpawnPlayer(int toClient, Player player, Vector3 position, Quaternion rotation)
         {
             using (Packet packet = new Packet((int)ServerPackets.spawnPlayer))
             {
                 packet.Write(player.Id);
                 packet.Write(player.Username);
-                packet.Write(player.Score);
+                packet.Write(position);
+                packet.Write(rotation);
 
                 SendTCPDataToClient(toClient, packet);
             }

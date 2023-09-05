@@ -18,6 +18,9 @@ namespace FPS_Server
         quitLobbySuccess,
         forceQuitLobby,
         startGame,
+        playerPosition,
+        playerRotation,
+
     }
 
     /// <summary>Sent from client to server.</summary>
@@ -28,19 +31,8 @@ namespace FPS_Server
         joinLobby,
         quitLobby,
         startGameRequest,
-    }
-
-    // <summary>Sent from client as a player to server</summary>
-    public enum GameServerPackets
-    {
-        playerTurnEnd,
-    }
-
-    // <summary>Sent from server to client as a player</summary>
-    public enum PlayerPackets
-    {
-
-        playerStartTurn,
+        spawnPlayersInLobby,
+        playerInput,
     }
 
     public class Packet : IDisposable

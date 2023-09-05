@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace FPS_Server
 {
@@ -24,7 +25,7 @@ namespace FPS_Server
 
         public void CreatePlayerData(string playerName)
         {
-            m_Player = new Player(Id, playerName);
+            m_Player = new Player(Id, playerName, Vector3.Zero);
         }
 
         public void SendIntoGame()
@@ -35,7 +36,7 @@ namespace FPS_Server
                 if (connectedClient.Id == Id) continue;
                 if (connectedClient.m_Player == null) continue;
 
-                ServerSend.SpawnPlayer(Id, connectedClient.m_Player);
+                ServerSend.SpawnPlayer(Id, connectedClient.m_Player, connectedClient.m_Player.Position, connectedClient.m_Player.Rotation);
             }
 
             // Spawn this client gameObject to existing clients (including itself)
@@ -43,7 +44,7 @@ namespace FPS_Server
             {
                 if (connectedClient.m_Player == null) continue;
 
-                ServerSend.SpawnPlayer(connectedClient.Id, m_Player);
+                ServerSend.SpawnPlayer(connectedClient.Id, m_Player, connectedClient.m_Player.Position, connectedClient.m_Player.Rotation);
             }
         }
 

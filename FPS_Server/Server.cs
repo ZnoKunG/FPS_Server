@@ -74,6 +74,8 @@ namespace FPS_Server
                 { (int)ClientPackets.createLobby, ServerHandle.CreateLobby },
                 { (int)ClientPackets.joinLobby, ServerHandle.RequestToJoinLobby },
                 { (int)ClientPackets.quitLobby, ServerHandle.QuitLobby },
+                { (int)ClientPackets.startGameRequest, ServerHandle.StartGameRequest },
+                { (int)ClientPackets.spawnPlayersInLobby, ServerHandle.SpawnPlayersInLobby },
             };
         }
 

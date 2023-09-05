@@ -11,7 +11,7 @@ namespace FPS_Server
         private static bool isRunning = false;
         static void Main(string[] args)
         {
-            Console.Title = "Mine Server";
+            Console.Title = "FPS Server";
             isRunning = true;
             Thread mainThread = new Thread(new ThreadStart(MainThread));
             mainThread.Start();

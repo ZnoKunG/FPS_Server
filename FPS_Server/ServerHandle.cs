@@ -114,22 +114,26 @@ namespace FPS_Server
                 Console.WriteLine($"Lobby {gameLobby.Name} is not ready yet.");
             }
 
+            Console.WriteLine($"Start Game in lobby {gameLobby.Name}");
             foreach (Client client in gameLobby.inLobbyClients.Values)
             {
-                SpawnPlayersInLobby(client.Id, gameLobby);
                 ServerSend.StartGame(client.Id);
             }
         }
 
-        private static void SpawnPlayersInLobby(int fromClient, Lobby lobby)
+        public static void SpawnPlayersInLobby(int fromClient, Packet packet)
         {
+            int clientId = packet.ReadInt();
+
+            Lobby gameLobby = Server.clients[clientId].m_Player.currentLobby;
+
+            Console.WriteLine($"Spawn players in lobby to Client {clientId}");
             // Spawn other clients on client's game
-            foreach (Client connectedClient in lobby.inLobbyClients.Values)
+            foreach (Client connectedClient in gameLobby.inLobbyClients.Values)
             {
-                if (connectedClient.Id == fromClient) continue;
                 if (connectedClient.m_Player == null) continue;
 
-                ServerSend.SpawnPlayer(fromClient, connectedClient.m_Player);
+                ServerSend.SpawnPlayer(fromClient, connectedClient.m_Player, connectedClient.m_Player.Position, connectedClient.m_Player.Rotation);
             }
         }
         #endregion
